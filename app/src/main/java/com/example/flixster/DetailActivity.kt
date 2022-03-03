@@ -44,11 +44,11 @@ class DetailActivity : YouTubeBaseActivity() {
             override fun onFailure(
                 statusCode: Int, headers: Headers?, response: String?, throwable: Throwable?
             ) {
-                Log.i(TAG, "onFailure $statusCode")
+                Log.e(TAG, "onFailure $statusCode")
             }
 
             override fun onSuccess(statusCode: Int, headers: Headers?, json: JSON) {
-                Log.i(TAG, "onSuccess $statusCode")
+                Log.i(TAG, "onSuccess")
                 val results = json.jsonObject.getJSONArray("results")
                 if(results.length()==0){
                     Log.w(TAG, "No movie trailers found")
