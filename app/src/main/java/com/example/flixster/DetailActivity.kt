@@ -77,7 +77,12 @@ class DetailActivity : YouTubeBaseActivity() {
                 p2: Boolean
             ) {
                 Log.i(TAG, "onInitializationSuccess")
-                player?.cueVideo(youtubeKey)
+                if(ratingBar.rating>5){
+                    Log.i(TAG, "rating over 5")
+                    player?.loadVideo(youtubeKey) //loadvideo will automatically play the video
+                }else{
+                    player?.cueVideo(youtubeKey) //cueVideo will load the video but not play
+                }
             }
 
             override fun onInitializationFailure(
