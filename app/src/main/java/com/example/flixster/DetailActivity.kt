@@ -22,6 +22,8 @@ class DetailActivity : YouTubeBaseActivity() {
     private lateinit var tvTitle : TextView
     private lateinit var tvOverview : TextView
     private lateinit var ratingBar : RatingBar
+    private lateinit var tvPopularity: TextView
+    private lateinit var tvReleaseDate: TextView
     private lateinit var ytPlayerView: YouTubePlayerView
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -30,14 +32,17 @@ class DetailActivity : YouTubeBaseActivity() {
         tvTitle = findViewById(R.id.tvTitle)
         tvOverview = findViewById(R.id.tvOverview)
         ratingBar = findViewById(R.id.rbVoteAverage)
+        tvPopularity = findViewById(R.id.tvPopularity)
+        tvReleaseDate = findViewById(R.id.tvReleaseDate)
         ytPlayerView = findViewById(R.id.player)
 
         val movie = intent.getParcelableExtra<Movie>(MOVIE_EXTRA) as Movie
         Log.i(TAG, "Movie is $movie")
         tvTitle.text = movie.title
         tvOverview.text = movie.overview
-        //get rating of movie
-        ratingBar.rating = movie.voteAverage.toFloat()
+        ratingBar.rating = movie.voteAverage.toFloat() //get rating of movie
+        tvPopularity.text = "Popularity: "+movie.popularity
+        tvReleaseDate.text = "Release Date: "+movie.releaseDate
 
         val client = AsyncHttpClient()
         client.get(TRAILERS_URL.format(movie.movieId), object: JsonHttpResponseHandler(){
